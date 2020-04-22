@@ -14,7 +14,7 @@ export const store = createStore(
 				case mutations.CREATE_TASK:
 					return [...tasks, {
 						id:action.taskID,
-						name: `New task - ${action.taskID}`,
+						name: `New task`,
 						group:action.groupID,
 						owner:action.ownerID,
 						isComplete: false
