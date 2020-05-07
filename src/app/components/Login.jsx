@@ -10,13 +10,13 @@ const LoginComponent = ({ authenticateUser, authenticated }) => {
 				type="text" 
 				placeholder="username" 
 				name="username" 
-				defaultValue="Dev"
+				defaultValue="Admin_1"
 			/>
 			<input 
 				type="password" 
 				placeholder="password" 
 				name="password"
-				defaultValue=""
+				defaultValue="user1"
 			/>
 			{authenticated === mutations.NOT_AUTHENTICATED ? 
 				<p>Login Incorrect</p> : null}

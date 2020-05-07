@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 
 import * as mutations from './mutations'
+import { history } from './history'
 
 const url = "http://localhost:7788"
 
@@ -48,12 +49,19 @@ export function* userAuthenticationSaga() {
 			mutations.REQUEST_AUTHENTICATE_USER
 		)
 		try {
-			const { data } = axios.post(
+			const { data } = yield axios.post(
 				url + `/authenticate`, {username, password}
 			)
 			if (!data) {
 				throw new Error()
 			}
+			console.log("Authenticated!", data)
+
+			yield put(mutations.setState(data.state))
+			yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED))
+
+			history.push('/dashboard')
+
 		} catch (e) {
 			console.log("Can't Authenticate...")
 			yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED))
